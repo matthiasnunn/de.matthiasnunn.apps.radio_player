@@ -1,7 +1,7 @@
 name: radio_player
 # flutter pub publish
 publish_to: "none"
-version: 1.0.0+1
+version: 0.1.0+1
 
 
 environment:
