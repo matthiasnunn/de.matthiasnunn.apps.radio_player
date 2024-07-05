@@ -1,0 +1,62 @@
+on:
+
+  push:
+    branches:
+      - main
+
+  # action triggerable via web
+  workflow_dispatch:
+
+
+jobs:
+
+  build-android-release:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check out main branch
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build
+        run: flutter build apk --release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+  build-windows-release:
+
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Check out main branch
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+
+      - name: Build
+        run: flutter build windows --release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: build/windows/x64/runner/Release
