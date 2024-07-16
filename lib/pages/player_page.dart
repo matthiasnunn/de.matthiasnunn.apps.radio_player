@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:radio_player/db/instances.dart';
 import 'package:radio_player/main.dart';
-import 'package:radio_player/models/instance.dart';
 import 'package:radio_player/models/radio.dart' as custom;
-import 'package:radio_player/widgets/instances_drawer.dart';
 import 'package:radio_player/widgets/player.dart';
 import 'package:radio_player/widgets/radio_view.dart';
 
@@ -22,20 +19,24 @@ class PlayerPage extends StatefulWidget {
 
 class _PlayerPageState extends State<PlayerPage> {
 
-  Instance? _instance;
   custom.Radio? _radio;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("ownCloud Music Radio")
+        title: const Text("ownCloud Music Radio"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: _logout
+          )
+        ]
       ),
       body: Column(
         children: [
           Expanded(
             child: RadioView(
-              instance: _instance,
               onRadioSelect: (custom.Radio radio) async {
                 setState(() => _radio = radio);
                 // TODO: die folgenden drei Zeilen können theoretisch nach
@@ -55,29 +56,31 @@ class _PlayerPageState extends State<PlayerPage> {
               radio: _radio!
             )
         ]
-      ),
-      drawer: InstancesDrawer(
-        onInstanceChange: (Instance? instance) async {
-          await Instances.setLastInstance(instance);
-          setState(() => _instance = instance);
-        },
-        selectedInstance: _instance
       )
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _loadAndSetLastInstance();
-  }
-
-  Future<void> _loadAndSetLastInstance() async {
-    final instance = await Instances.getLastInstance();
-    if (instance != null) {
-      setState(() {
-        _instance = instance;
-      });
-    }
+  _logout() {
+    // TODO: logout + wollen sie sich wirklich ausloggen?
+    // TODO: close dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("My title"),
+          content: Text("This is my message."),
+          actions: [
+            TextButton(
+              child: Text("OK"),
+              onPressed: () { },
+            ),
+            TextButton(
+              child: Text("lal"),
+              onPressed: () {}
+            )
+          ]
+        );
+      }
+    );
   }
 }

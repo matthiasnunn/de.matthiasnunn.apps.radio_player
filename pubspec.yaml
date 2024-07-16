@@ -18,6 +18,8 @@ dependencies:
   http: ^1.2.0
   just_audio: ^0.9.37
   just_audio_windows: ^0.2.1
+  nextcloud_login_flow_v2:
+    path: ./nextcloud_login_flow_v2
   url_builder: ^2.0.0
 
 
