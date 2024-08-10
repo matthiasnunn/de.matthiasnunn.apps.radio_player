@@ -33,6 +33,8 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.white
         ),
         colorScheme: ColorScheme(
+          background: const Color.fromRGBO(245, 245, 245, 1),
+          onBackground: Colors.black,
           brightness: Brightness.dark,
           primary: blue,
           onPrimary: Colors.white,
@@ -52,6 +54,8 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.white
         ),
         colorScheme: ColorScheme(
+          background: Colors.black,
+          onBackground: Colors.white,
           brightness: Brightness.dark,
           primary: blue,
           onPrimary: Colors.white,
