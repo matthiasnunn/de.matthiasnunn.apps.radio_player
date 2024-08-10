@@ -1,5 +1,6 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio_media_kit/just_audio_media_kit.dart';
 import 'package:radio_player/pages/player_page.dart';
 import 'package:radio_player/utils/my_audio_handler.dart';
 
@@ -8,6 +9,7 @@ late MyAudioHandler audioHandler;
 
 
 Future<void> main() async {
+  JustAudioMediaKit.ensureInitialized();
   audioHandler = await AudioService.init(
     builder: () => MyAudioHandler(),
     config: const AudioServiceConfig(
